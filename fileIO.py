@@ -19,7 +19,11 @@ def importLab(filename, NUM):
     filename = "toGrade/"+filename
 
     #find 01supesupport_previewuser
-    dumbIndex = students.index("01supesupport_previewuser@crimson.ua.edu")
+    dumbIndex = ""
+    try:
+        dumbIndex = students.index("01supesupport_previewuser@crimson.ua.edu")
+    except:
+        print("error")
 
     with open(filename, newline='') as section2:
         reader = csv.reader(section2, delimiter=',')
@@ -44,11 +48,12 @@ def importLab(filename, NUM):
                 grades.append(temp)
                 index += 1
 
-    # adds space for supestore user            
-    grades.insert(dumbIndex-1, [])
+    # adds space for supestore user   
+    if(dumbIndex != ""):
+        grades.insert(dumbIndex-1, [])         
 
     # adds header to top (optional)
-    #grades.insert(0, header)
+    # grades.insert(0, header)
 
     #write grades to new csv for copy pasting
     with open('LAB/'+''+'LAB'+str(NUM)+'.csv', 'w', newline='') as csvfile:
@@ -68,7 +73,11 @@ def importHW(filename, NUM):
     filename = "toGrade/"+filename
 
     #find 01supesupport_previewuser
-    dumbIndex = students.index("01supesupport_previewuser@crimson.ua.edu")
+    dumbIndex = -1;
+    try:
+        dumbIndex = students.index("01supesupport_previewuser@crimson.ua.edu")
+    except:
+        pass
 
     with open(filename, newline='') as section2:
         reader = csv.reader(section2, delimiter=',')
@@ -101,8 +110,9 @@ def importHW(filename, NUM):
         elif(float(percent[3]) >= 50):
             percent[3] = 80
 
-    # adds space for supestore user            
-    grades.insert(dumbIndex-1, [])
+    # adds space for supestore user     
+    if(dumbIndex != -1):
+        grades.insert(dumbIndex-1, [])
 
     # adds header to top (optional)
     #grades.insert(0, header)

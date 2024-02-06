@@ -27,9 +27,17 @@ while(True):
                 
 
         elif(selection == 2):
-            fileIO.importLab(file_name, number)
+            try:
+                fileIO.importLab(file_name, number)
+                print("-------------------")
+                print("Graded successfully")
+                print("-------------------")
+            except:
+                print("!!!!!!!!!!!!!!")
+                print("File not found")
+                print("!!!!!!!!!!!!!!")
         elif(selection == 0):
             exit()
         else:
-            print("invalid option")
+            print("invalid option grading operation")
             flag = True
