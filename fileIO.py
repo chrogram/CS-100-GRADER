@@ -122,4 +122,59 @@ def importHW(filename, NUM):
         spamwriter = csv.writer(csvfile, delimiter=',')
         for row in grades:
             spamwriter.writerow(row)
+
+def importProject(filename, NUM):
+
+    temp = importStudents("students.txt")
+    students = []
+
+    for i in temp:
+        students.append(i+"@crimson.ua.edu")
+    header = []
+    grades = []
+    filename = "toGrade/"+filename
+
+    #find 01supesupport_previewuser
+    dumbIndex = ""
+    try:
+        dumbIndex = students.index("01supesupport_previewuser@crimson.ua.edu")
+    except:
+        print("error")
+
+    with open(filename, newline='') as section2:
+        reader = csv.reader(section2, delimiter=',')
+        firstRow = True
+        index = 0
+        for row in reader:
+            # removes header
+            if(firstRow == True):
+                header.append(row[0])
+                header.append(row[1])
+                header.append(row[2])
+                header.append(row[4])
+                firstRow = False
+            
+            # checks if student is in your section
+            elif(row[2].lower() in students):
+                temp = []
+                temp.append(row[0])
+                temp.append(row[1])
+                temp.append(row[2])
+                temp.append(row[4])
+                grades.append(temp)
+                index += 1
+
+    # adds space for supestore user   
+    if(dumbIndex != ""):
+        grades.insert(dumbIndex-1, [])         
+
+    # adds header to top (optional)
+    # grades.insert(0, header)
+
+    #write grades to new csv for copy pasting
+    with open('PROJECT/'+''+'PROJECT'+str(NUM)+'.csv', 'w', newline='') as csvfile:
+        spamwriter = csv.writer(csvfile, delimiter=',')
+        for row in grades:
+            spamwriter.writerow(row)
+
             
