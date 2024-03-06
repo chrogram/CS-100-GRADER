@@ -6,6 +6,8 @@ while(True):
     print("1 - HW")
     print("2 - LAB")
     print("3 - PROJECT")
+    print("4 - EXAM")
+
     print("0 - Exit")
     
 
@@ -47,6 +49,14 @@ while(True):
                 print("!!!!!!!!!!!!!!")
                 print("File not found")
                 print("!!!!!!!!!!!!!!")
+        elif(selection == 4):
+            
+            fileIO.importExam(file_name, number)
+            print("-------------------")
+            print("Graded successfully")
+            print("-------------------")
+
+
         elif(selection == 0):
             exit()
         else:
